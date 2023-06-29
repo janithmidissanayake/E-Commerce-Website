@@ -21,3 +21,41 @@ header a{
   font-weight: bold;
   text-decoration: none;
 }
+
+.products{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product{
+  border: 1px #404040 solid;
+  margin: 1rem;
+}
+
+.product img{
+  width:  100%;
+  max-width: 300px;
+ 
+}
+
+.feature-product{
+  padding-left: 5rem;
+}
+
+.product-info{
+  padding: 1rem;
+}
+
+.product-info button{
+  
+    background-color: white; 
+    color: black; 
+    border: 2px solid #008CBA;
+    border-radius: 4px;
+ 
+} 
+
+.product-info button:hover{
+  background-color:#008CBA ;
+}
