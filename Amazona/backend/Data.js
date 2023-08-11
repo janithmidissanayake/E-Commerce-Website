@@ -1,6 +1,6 @@
 const Data={
     product :[
-        {
+        {   id:'1',
             name:'Nike -Slim-Shirt',
             slug:'nike-slim-shirt',
             category:'Shirt',
@@ -12,7 +12,7 @@ const Data={
             numReviews:10,
             description:'hign quality product'
         },
-        {
+        {   id:'2',
             name:'Addidas -Fit-Shirt',
             slug:'addidas-fit-shirt',
             category:'Shirt',
@@ -25,7 +25,7 @@ const Data={
             description:'hign quality product'
 
         },
-        {
+        {    id:'3',
             name:'Nike-Fit-Pant',
             slug:'nike-fit-pant',
             category:'Pant',
@@ -38,7 +38,7 @@ const Data={
             description:'hign quality product'
 
         },
-        {
+        {    id:'4',
             name:'Boss-Fit-Pant',
             slug:'boss-fit-pant',
             category:'Pant',
