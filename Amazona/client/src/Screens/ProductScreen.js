@@ -1,5 +1,5 @@
 import React, { useEffect,useReducer,useContext } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,10 +7,11 @@ import Rating from "../Component/Rating";
 import ListGroup from "react-bootstrap/ListGroup";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
-import Button from "react-bootstrap/Button";
 import { Helmet } from "react-helmet";
 import Loading from "../Component/LoadingBox";
 import { StoreContext } from "../Store";
+import Button from 'react-bootstrap/Button';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -26,6 +27,7 @@ const reducer = (state, action) => {
 };
 
 function ProductScreen() {
+  const routernavigate=useNavigate();
   const params = useParams();
   const { slug } = params;
 
@@ -50,11 +52,39 @@ function ProductScreen() {
   }, [slug]);
 
   const { state: contextState, dispatch: ctxDispatch } = useContext(StoreContext);
+  const {cart}= contextState;
 
 
-  const addToCartHandler=() =>{
-    ctxDispatch({type:"CART_ADD_ITEM" , payload: {...product,quantity:1}})    
-  }
+  const addToCartHandler = async () => {
+    const existCartItem = cart.cartItems.find((x) => x.id === product.id);
+    const quantity = existCartItem ? existCartItem.quantity + 1 : 1;
+  
+    try {
+      const { data } = await axios.get(`/api/product/${product.id}`);
+      
+      ctxDispatch({
+        type: "CART_ADD_ITEM",
+        payload: {
+          ...data, // Using fetched product data instead of the original 'product'
+          quantity,
+        },
+      });
+
+      
+      if (data.countInStock < quantity) {
+        window.alert("The product count is not enough");
+        return;
+      }
+      routernavigate("/cart");
+
+
+    
+    } catch (error) {
+      console.error("Error fetching product:", error);
+      // Handle the error here (e.g., show an error message)
+    }
+    
+  };
 
   return loading ? (
     <Loading/>

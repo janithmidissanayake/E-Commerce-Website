@@ -70,3 +70,7 @@ main{
 .image-large{
   max-width: 350px;
 }
+
+.img-thumbnails{
+  height:80px;
+}
